@@ -1,0 +1,80 @@
+parse_file()
+{
+	string str = read_file();
+	int idx = find_non_whitespace(str);
+	root = create_object(substr(str, idx));
+}
+
+json::value create_value(string str)
+{
+	int idx = find_non_whitespace(str);
+	str = substr(str, idx);
+	json::value v;
+	if(str startswith '{')
+	{
+		v.obj = create_object(str);
+		v.type = obj;
+	}
+	else if((str startswith '"')
+	{
+		v.type = string;
+		//quotation mark (\") not allowed
+		v.value = substr(str, find(str+1, '"');
+	}
+	else if((str startswith "true")
+	{
+		v.bool = true;
+		v.type = bool;
+	}
+	else if((str startswith "false")
+	{
+		v.bool = false;
+		v.type = bool;
+	}
+	else if(str startswith "[0-9]" || str startswith "-[0-9]")
+	{
+		idx = find_non_(str, "[0-9].");
+		str = substr(str, idx);
+		double d = strtod(str);
+		if(d == ceil(d))
+		{
+			v.type = int;
+			v.d = ceil(d);
+		}
+		else
+		{
+			v.value = d;
+			v.type = double;
+		}
+	}
+	else if(str startswith '[')
+	{
+		v.type = vector;
+		while(1)
+		{
+			v.append(create_value(substr(
+		}
+	}
+	else
+		fail;
+
+	return v;
+}
+
+Object create_object(str)
+{
+	if(!str[0] == '{')
+		fail
+	str = substr(str, find_non_whitespace(str));
+	Object obj;
+
+	while(1)
+	{
+		int idx = find(str, ':');
+		if(idx == -1)
+			return obj;
+		int idx2 = find(str, ',');
+		obj[substr(str, 0, idx)] = create_value(substr(str, idx + 1, idx2));
+		str = substr(str, idx2);
+	}
+}
