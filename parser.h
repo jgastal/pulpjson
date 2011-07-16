@@ -40,6 +40,9 @@ class Value;
 typedef map<string, Value> Object;
 typedef vector<Value> Vector;
 
+/**
+ * @brief Parser is the class in PulpJSON which parses JSON.
+ */
 class Parser
 {
 	public:

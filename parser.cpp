@@ -37,6 +37,17 @@
 
 namespace libjson {
 
+/**
+ * @brief Parses the given file or string.
+ *
+ * @param file If true indicates @p str is the name of the file to be parsed, if false indicates str is the JSON string to be parsed.
+ * @param str The name of the file to be parser or the JSON string to be parsed.
+ *
+ * If in file mode the constructor opens the file, reads all of it and then closes the file, the read string is then parsed,
+ * just as @p str would be if not in file mode. Parsing the string can cause a @ref JSONException to be emmited
+ * if the JSON is not properly formatted. After the constructor is done it's perfectly safe to use the returned object
+ * without worrying about exceptions.
+ */
 Parser::Parser(const char* str, bool file)
 {
 	string json;
@@ -61,6 +72,10 @@ Parser::Parser(const char* str, bool file)
 	root = createObject(json);
 }
 
+/**
+ * @brief Gets the root object of the parsed JSON.
+ * @return A @ref Object representing the parsed JSON.
+ */
 Object Parser::getRootObject()
 {
 	return root;

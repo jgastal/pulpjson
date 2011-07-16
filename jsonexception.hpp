@@ -32,6 +32,11 @@
 
 namespace pulpjson {
 
+/**
+ * @brief Exception that represents an error parsing while parsing JSON.
+ *
+ * To get a descriptive message of the error use the inherited what() method.
+ */
 class JSONException : public std::runtime_error
 {
 	public:

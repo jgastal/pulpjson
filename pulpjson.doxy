@@ -1,0 +1,30 @@
+/**
+ * @mainpage PulpJSON - Beating JSON to a pulp
+ *
+ * @section usage How do I use PulpJSON?
+ * PulpJSON is a library that aims to make parsing JSON easy. So easy in fact that all you need to do in order to parse a file is:
+ * @code
+ * Parser p("my_file.json");
+ * Object root = p.getRootObject();
+ * @endcode
+ *
+ * After that you can go ahead and read the properties of the root object of json:
+ * @code
+ * string my_prop = root["my_prop"].asString();
+ * int my_other_prop = root["my_other_prop"].asInt();
+ * bool my_third_prop = root["my_third_prop"].asBool();
+ * @endcode
+ * 
+ * @section name So what up with the name up?
+ * I like Quentin Tarantino movies. In particular I like <a href="http://www.imdb.com/title/tt0110912/">Pulp Fiction</a>.
+ *
+ * @section pulp Definition of "pulp"
+ * (as seen on <a href="http://www.imdb.com/title/tt0110912/">Pulp Fiction</a>)
+ *
+ * Pulp n. @b 1. A soft, moist, shapeless mass of matter.@n
+ * @b 2. A magazine of book containing lurid subject matter and being characteristically printed on rough, unfinished paper.
+ *
+ * American Heritage Dictionary@n
+ * New College Edition
+ *
+ */

@@ -36,6 +36,43 @@ using namespace std;
 
 namespace libjson {
 
+/**
+ * @brief Class that encapsulates a JSON value.
+ *
+ * @warning There is no public constructor, the only way to get an instance of Value is through @ref Parser.
+ *
+ * The use of this class is fairly straight forward process, this shows a function that prints a value(recursively):
+ * @code
+ * //v must be a *Value instance gotten from Parser
+ * void print_value(Value v)
+ * {
+ * 	switch(v.getType())
+ * 	{
+ * 		case Value::INT:
+ * 			std::cout << "v is of type int and has value " << v.asInt() << "!\n";
+ * 			break;
+ * 		case Value::DOUBLE:
+ * 			std::cout << "v is of type double and has value " << v.asDouble() << "!\n";
+ * 			break;
+ * 		case Value::STRING:
+ * 			std::cout << "v is of type string and has value " << v.asString() << "!\n";
+ * 			break;
+ * 		case Value::BOOL:
+ * 			std::cout << "v is of type bool and has value " << v.asBool() << "!\n";
+ * 			break;
+ * 		case Value::VECTOR:
+ * 			std::cout << "v is of type vector and has value: \n";
+ * 			for(int i = 0; i < v.asVector().size(); i++)
+ * 				print_value(v.asVector()[i]);
+ * 			break;
+ * 		case Value::OBJECT:
+ * 			std::cout << "v is of type object and has value: \n";
+ * 			for(Object::iterator it = v.asObject().begin(); it != v.asObject().end(); it++)
+ * 				print_value((*it).second);
+ * 	}
+ * }
+ * @endcode
+ */
 class Value
 {
 	public:

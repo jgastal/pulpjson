@@ -14,9 +14,12 @@ add_library(json SHARED ${SOURCES})
 set_target_properties(json PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 set_target_properties(json PROPERTIES VERSION ${PROJECT_VERSION})
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/pkgconfig ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc @ONLY)
+configure_file(pkgconfig ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc @ONLY)
 install(TARGETS json DESTINATION lib/ CONFIGURATIONS Release)
 install(FILES parser.h value.h DESTINATION include/PulpJSON CONFIGURATIONS Release)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc DESTINATION lib/pkgconfig/ CONFIGURATIONS Release)
+
+configure_file(Doxyfile .)
+add_custom_target(doc doxygen)
 
 add_subdirectory(tests EXCLUDE_FROM_ALL)

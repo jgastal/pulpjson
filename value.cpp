@@ -29,36 +29,76 @@
 
 namespace libjson {
 
+/**
+ * @brief Gets the type this @ref Value represents.
+ * @returns The type of this @ref Value.
+ */
 Value::Type Value::getType()
 {
 	return t;
 }
 
+/**
+ * @brief Gets this value as a boolean.
+ * @returns This @ref Value as a bool
+ *
+ * @warning Undefined behavior if this @ref Value is not of type @ref BOOL
+ */
 bool Value::asBool()
 {
 	return b;
 }
 
+/**
+ * @brief Gets this value as a double.
+ * @returns This @ref Value as a double
+ *
+ * @warning Undefined behavior if this @ref Value is not of type @ref DOUBLE
+ */
 double Value::asDouble()
 {
 	return d;
 }
 
+/**
+ * @brief Gets this value as an integer.
+ * @returns This @ref Value as a int
+ *
+ * @warning Undefined behavior if this @ref Value is not of type @ref INT
+ */
 int Value::asInt()
 {
 	return i;
 }
 
+/**
+ * @brief Gets this value as an @ref Object.
+ * @returns This @ref Value as an @ref Object
+ *
+ * @warning Undefined behavior if this @ref Value is not of type @ref OBJECT
+ */
 Object Value::asObject()
 {
 	return obj;
 }
 
+/**
+ * @brief Gets this value as a string.
+ * @returns This @ref Value as a string
+ *
+ * @warning Undefined behavior if this @ref Value is not of type @ref STRING
+ */
 string Value::asString()
 {
 	return str;
 }
 
+/**
+ * @brief Gets this value as a @ref Vector.
+ * @returns This @ref Value as a @ref Vector
+ *
+ * @warning Undefined behavior if this @ref Value is not of type @ref VECTOR
+ */
 Vector Value::asVector()
 {
 	return v;
