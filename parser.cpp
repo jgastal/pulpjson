@@ -105,12 +105,14 @@ Value *Parser::createValue(string str)
 	{
 		v->t = Value::VECTOR;
 		v->v = new vector<Value*>();
-		while(true)
+
+		str = str.substr(1);
+		while(str[0] != ']')
 		{
-			int idx = str.find(',');
+			size_t idx = findValueEnd(str);
 			if(idx == string::npos)
 				break;
-			v->v->push_back(createValue(str.substr(1, idx)));
+			v->v->push_back(createValue(str.substr(0, idx)));
 			str = str.substr(idx + 1);
 		}
 	}
@@ -157,7 +159,7 @@ size_t Parser::findValueEnd(string str)
 		}
 	}
 	else
-		idx = str.find(',') - 1;
+		idx = str.find_first_of(",]}") - 1;
 
 	return ++idx;
 }
