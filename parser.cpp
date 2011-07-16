@@ -67,6 +67,7 @@ Object Parser::getRootObject()
 
 Object Parser::createObject(string &str)
 {
+	str = str.substr(str.find_first_not_of(" \t\n\r"));
 	if(str[0] != '{')
 		throw JSONException(string("Objects must start with '{' found '") + str[0] + "' instead.");
 
