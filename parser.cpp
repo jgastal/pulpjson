@@ -122,9 +122,9 @@ Value *Parser::createValue(string str)
 
 size_t Parser::findValueEnd(string str)
 {
-	size_t idx = 0;
+	size_t idx = str.find_first_not_of(" \t\r\n");
 	short int nesting = 1;
-	if(str[0] == '{')
+	if(str[idx] == '{')
 	{
 		while(nesting)
 		{
@@ -136,7 +136,7 @@ size_t Parser::findValueEnd(string str)
 		}
 		
 	}
-	else if(str[0] == '[')
+	else if(str[idx] == '[')
 	{
 		while(nesting)
 		{
@@ -147,7 +147,7 @@ size_t Parser::findValueEnd(string str)
 				nesting--;
 		}
 	}
-	else if(str[0] == '"')
+	else if(str[idx] == '"')
 	{
 		while(1)
 		{
