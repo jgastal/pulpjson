@@ -53,6 +53,7 @@ Parser::Parser(const char* str, bool file)
 			file >> line;
 			str.append(line);
 		}
+		file.close();
 	}
 	else
 		json = str;
