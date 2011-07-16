@@ -35,7 +35,7 @@
 #include "value.h"
 #include "jsonexception.hpp"
 
-namespace libjson {
+namespace pulpjson {
 
 /**
  * @brief Parses the given file or string.

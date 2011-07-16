@@ -27,7 +27,7 @@
 
 #include "value.h"
 
-namespace libjson {
+namespace pulpjson {
 
 /**
  * @brief Gets the type this @ref Value represents.

@@ -34,7 +34,7 @@
 
 using namespace std;
 
-namespace libjson {
+namespace pulpjson {
 
 /**
  * @brief Class that encapsulates a JSON value.

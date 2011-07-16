@@ -34,14 +34,27 @@
 
 using namespace std;
 
-namespace libjson {
+/**
+ * @brief Namespace containing all types defined by PulpJSON.s
+ */
+namespace pulpjson {
 
 class Value;
+/**
+ * @brief Representation a JSON object.
+ *
+ * Collection of pairs of string and @ref Value representing a JSON object.
+ */
 typedef map<string, Value> Object;
+/**
+ * @brief Representation a JSON vector.
+ *
+ * Collection of @ref Value "Values" representing a JSON vector.
+ */
 typedef vector<Value> Vector;
 
 /**
- * @brief Parser is the class in PulpJSON which parses JSON.
+ * @brief JSON parser for PulpJSON.
  */
 class Parser
 {
