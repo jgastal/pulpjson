@@ -32,8 +32,6 @@
 #include <cmath>
 #include <cstdlib>
 
-#include <iostream>
-
 #include "value.h"
 #include "jsonexception.hpp"
 
