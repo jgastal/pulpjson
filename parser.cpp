@@ -35,6 +35,7 @@
 #include <iostream>
 
 #include "value.h"
+#include "jsonexception.hpp"
 
 namespace libjson {
 
@@ -46,7 +47,7 @@ Parser::Parser(const char* str, bool file) : root(NULL)
 		ifstream file(str, ifstream::in);
 		string str;
 		if(!file.is_open())
-			return;
+			throw ios_base::failure("File not found");
 
 		while(!file.eof())
 		{
@@ -69,7 +70,7 @@ Object *Parser::getRootObject()
 Object *Parser::createObject(string &str)
 {
 	if(str[0] != '{')
-		return NULL;
+		throw JSONException(string("Objects must start with '{' found '") + str[0] + "' instead.");
 
 	str = str.substr(str.find_first_not_of("{"));
 	Object *obj = new Object();
@@ -144,7 +145,7 @@ Value *Parser::createValue(string str)
 		}
 	}
 	else
-		return NULL;
+		throw JSONException("Can't parse \"" + str + "\" as a JSON value.");
 
 	return v;
 }
