@@ -37,7 +37,7 @@
 
 namespace libjson {
 
-Parser::Parser(const char* str, bool file) : root(NULL)
+Parser::Parser(const char* str, bool file)
 {
 	string json;
 	if(file)
@@ -60,25 +60,25 @@ Parser::Parser(const char* str, bool file) : root(NULL)
 	root = createObject(json);
 }
 
-Object *Parser::getRootObject()
+Object Parser::getRootObject()
 {
 	return root;
 }
 
-Object *Parser::createObject(string &str)
+Object Parser::createObject(string &str)
 {
 	if(str[0] != '{')
 		throw JSONException(string("Objects must start with '{' found '") + str[0] + "' instead.");
 
 	str = str.substr(str.find_first_not_of("{"));
-	Object *obj = new Object();
+	Object obj;
 
 	while(str[0] != '}')
 	{
 		str = str.substr(str.find_first_not_of(" \t\n\r"));
 		size_t idxStart = str.find(':');
 		size_t idxEnd = findValueEnd(str.substr(idxStart + 1));
-		(*obj)[str.substr(0, idxStart)] = createValue(str.substr(idxStart + 1, idxEnd));
+		obj[str.substr(0, idxStart)] = createValue(str.substr(idxStart + 1, idxEnd));
 		idxEnd = str.find(',', idxStart + 1 + idxEnd);
 		if(idxEnd == string::npos)
 			break;
@@ -88,49 +88,49 @@ Object *Parser::createObject(string &str)
 	return obj;
 }
 
-Value *Parser::createValue(string str)
+Value Parser::createValue(string str)
 {
-	Value *v = new Value();
+	Value v;
 
 	str = str.substr(str.find_first_not_of(" \t\n\r"));
 	if(str[0] == '{')
 	{
-		v->t = Value::OBJECT;
-		v->obj = createObject(str);
+		v.t = Value::OBJECT;
+		v.obj = createObject(str);
 	}
 	else if(str[0] == '"')
 	{
-		v->t = Value::STRING;
-		v->str = str.substr(1, str.find('"', 1) - 1);
+		v.t = Value::STRING;
+		v.str = str.substr(1, str.find('"', 1) - 1);
 	}
 	else if(str.find("true") == 0)
 	{
-		v->t = Value::BOOL;
-		v->b = true;
+		v.t = Value::BOOL;
+		v.b = true;
 	}
 	else if(str.find("false") == 0)
 	{
-		v->t = Value::BOOL;
-		v->b = false;
+		v.t = Value::BOOL;
+		v.b = false;
 	}
 	else if(str.find_first_of("0123456789-") == 0)
 	{
 		double d = atof(str.c_str());
 		if(d == ceil(d))
 		{
-			v->t = Value::INT;
-			v->i = ceil(d);
+			v.t = Value::INT;
+			v.i = ceil(d);
 		}
 		else
 		{
-			v->t = Value::DOUBLE;
-			v->d = d;
+			v.t = Value::DOUBLE;
+			v.d = d;
 		}
 	}
 	else if(str[0] == '[')
 	{
-		v->t = Value::VECTOR;
-		v->v = new vector<Value*>();
+		v.t = Value::VECTOR;
+		v.v = Vector();
 
 		str = str.substr(1);
 		while(str[0] != ']')
@@ -138,7 +138,7 @@ Value *Parser::createValue(string str)
 			size_t idx = findValueEnd(str);
 			if(idx == string::npos)
 				break;
-			v->v->push_back(createValue(str.substr(0, idx)));
+			v.v.push_back(createValue(str.substr(0, idx)));
 			str = str.substr(idx + 1);
 		}
 	}

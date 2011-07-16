@@ -51,17 +51,18 @@ class Value
 		string asString();
 		int asInt();
 		double asDouble();
-		Object *asObject();
+		Object asObject();
 		bool asBool();
-		Vector *asVector();
+		Vector asVector();
 
 	private:
 		Value() { };
 		friend class Parser;
+		friend class map<string, Value>;
 
 		Type t;
-		Object *obj;
-		Vector *v;
+		Object obj;
+		Vector v;
 		string str;
 		double d;
 		int i;

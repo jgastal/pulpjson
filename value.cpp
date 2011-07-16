@@ -49,7 +49,7 @@ int Value::asInt()
 	return i;
 }
 
-Object* Value::asObject()
+Object Value::asObject()
 {
 	return obj;
 }
@@ -59,7 +59,7 @@ string Value::asString()
 	return str;
 }
 
-Vector* Value::asVector()
+Vector Value::asVector()
 {
 	return v;
 }
