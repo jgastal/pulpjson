@@ -54,7 +54,6 @@ Parser::Parser(const char* str, bool file)
 	if(file)
 	{
 		ifstream file(str, ifstream::in);
-		string str;
 		if(!file.is_open())
 			throw ios_base::failure("File not found");
 
@@ -62,7 +61,7 @@ Parser::Parser(const char* str, bool file)
 		{
 			string line;
 			file >> line;
-			str.append(line);
+			json.append(line);
 		}
 		file.close();
 	}
@@ -79,7 +78,7 @@ Parser::Parser(const char* str, bool file)
 	}
 	catch(std::exception)
 	{
-		throw JSONException(string("\"") + str + "\" is not valid JSON.");
+		throw JSONException(string("\"") + json + "\" is not valid JSON.");
 	}
 }
 
