@@ -27,10 +27,13 @@
 
 #include "parser.h"
 #include "value.h"
+#include "object.h"
 
 #define BOOST_TEST_MODULE Parser
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
+
+#include <iostream>
 
 using namespace pulpjson;
 
@@ -241,4 +244,17 @@ BOOST_AUTO_TEST_CASE( vector_prop )
 	BOOST_CHECK_EQUAL(f3.size(), 1);
 	BOOST_REQUIRE_EQUAL(f3["a"].getType(), Value::VECTOR);
 	BOOST_REQUIRE_EQUAL(f3["a"].asVector().size(), 0);
+}
+
+BOOST_AUTO_TEST_CASE( asJSON )
+{
+	Object o;
+	o["a"] = 0;
+	o["b"] = 1;
+	o["c"] = 2;
+	o["d"] = Value("asdf");
+	o["e"] = Value(false);
+
+	std::cout << o.asJSON() << std::endl;
+	BOOST_CHECK_EQUAL(o.asJSON().compare("{\n\ta: 0,\n\tb: 1,\n\tc: 2,\n\td: \"asdf\",\n\te: false\n}"), 0);
 }

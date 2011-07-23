@@ -6,6 +6,7 @@ set(PROJECT_VERSION 0.1)
 cmake_minimum_required(VERSION 2.6)
 
 set(SOURCES
+	object.cpp
 	jsonexception.hpp
 	parser.cpp
 	value.cpp)

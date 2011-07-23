@@ -26,8 +26,49 @@
  */
 
 #include "value.h"
+#include "object.h"
+#include <sstream>
+#include <iostream>
 
 namespace pulpjson {
+
+Value::Value(int i)
+{
+	this->i = i;
+	t = INT;
+}
+
+Value::Value(double d)
+{
+	this->d = d;
+	t = DOUBLE;
+}
+
+Value::Value(string str)
+{
+	std::cout << "string ctor\n";
+	this->str = str;
+	t = STRING;
+}
+
+Value::Value(Object obj)
+{
+	this->obj = obj;
+	t = OBJECT;
+}
+
+Value::Value(Vector v)
+{
+	this->v = v;
+	t = VECTOR;
+}
+
+Value::Value(bool b)
+{
+	std::cout << "bool ctor\n";
+	this->b = b;
+	t = BOOL;
+}
 
 /**
  * @brief Gets the type this @ref Value represents.
@@ -102,6 +143,33 @@ string Value::asString()
 Vector Value::asVector()
 {
 	return v;
+}
+
+string Value::asJSON()
+{
+	std::stringstream val;
+	switch(t)
+	{
+		case Value::INT:
+			val << i;
+			return val.str();
+		case Value::DOUBLE:
+			val << d;
+			return val.str();
+		case Value::STRING:
+			return str;
+		case Value::BOOL:
+			val << b ? "true" : "false";
+			return val.str();
+		case Value::VECTOR:
+			val << "[";
+			for(int i = 0; i < v.size(); i++)
+				val << v[i].asJSON() << ", ";
+			val << "]";
+			return val.str();
+		case Value::OBJECT:
+			return obj.asJSON();
+	}
 }
 
 }

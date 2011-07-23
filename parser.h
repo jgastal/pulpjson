@@ -32,6 +32,8 @@
 #include <map>
 #include <vector>
 
+#include "object.h"
+
 using namespace std;
 
 /**
@@ -40,19 +42,6 @@ using namespace std;
 namespace pulpjson {
 
 class Value;
-/**
- * @brief Representation a JSON object.
- *
- * Collection of pairs of string and @ref Value representing a JSON object.
- */
-typedef map<string, Value> Object;
-/**
- * @brief Representation a JSON vector.
- *
- * Collection of @ref Value "Values" representing a JSON vector.
- */
-typedef vector<Value> Vector;
-
 /**
  * @brief JSON parser for PulpJSON.
  */

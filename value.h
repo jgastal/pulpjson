@@ -30,7 +30,7 @@
 
 #include <map>
 #include <string>
-#include "parser.h"
+#include "object.h"
 
 using namespace std;
 
@@ -84,6 +84,12 @@ class Value
 			BOOL,
 			VECTOR
 		};
+		Value(int i);
+		Value(double d);
+		Value(string str);
+		Value(Object obj);
+		Value(Vector v);
+		Value(bool b);
 		Type getType();
 		string asString();
 		int asInt();
@@ -91,6 +97,7 @@ class Value
 		Object asObject();
 		bool asBool();
 		Vector asVector();
+		string asJSON();
 
 	private:
 		Value() { };
